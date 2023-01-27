@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page de connexion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_v2.css') }}">
+    <!--<script>
+	function onlyLettersAndNumbers(str) {
+
+	  if (Boolean(str.match(/^[A-Za-z0-9]*$/))) {
+		return true;	
+  	  } else {
+		alert("Caractères interdits!")	      
+	  	return false;		    
+	  }
+	}
+	function validateForm() {
+	    var x = document.forms["myForm"]["username"].value;
+	    if (onlyLettersAndNumbers(x)) {
+		return true;
+	    }
+	    return false;
+		
+	}
+    </script>-->
+    <nav class="navbar">
+      <div class="logo">DLS Cyber</div>
+      <ul class="nav-links">
+        <!---->
+        <input type="checkbox" id="checkbox_toggle" />
+        <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+        <!---->
+        <div class="menu">
+          {% if user is not defined %}
+          <a href="login.html">Login</a> |
+          <a href="register.html">Signin</a> |
+          {% else %}
+          <a href="mon_compte">Account</a> |
+          <a href="/" onclick="document.cookie='session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'">Logout</a> |
+          {% endif %}
+          {% if user == 'admin' %}
+          <!-- <a href="admin?cmd=photo">Admin Panel</a> | -->
+          <li class="services">
+            <a href="admin">Admin Panel  </a> |
+            <ul class="dropdown">
+              <li><a href="admin?cmd=photo">photo</a></li>
+              <li><a href="admin?cmd=print">print</a></li>
+              <li><a href="admin?cmd=date">date</a></li>
+            </ul>
+          </li>
+          <a href="contact">Contact</a>
+          {% else %}
+          <a href="contact">Contact</a>
+          {% endif %}
+        </div>
+      </ul>
+    </nav>
+  </head>
+  <body>
+    <h1 style="text-align:center">Connexion</h1>
+    <form name="myForm" method="post" action="login" style="text-align:center"><!-- onsubmit="return validateForm()">-->
+      <label for="username">Nom d'utilisateur :</label>
+      <input type="text" id="username" name="username">
+      <br>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" name="password">
+      <br>
+      <input type="submit" value="Se connecter">
+    </form>
+    <footer style="text-align:center">
+      <br>
+      <b><a href="/" >Back to home page</a></b>
+    </footer>
+  </body>
+</html>

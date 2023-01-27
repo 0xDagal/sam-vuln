@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'inscription</title>
+  </head>
+<body> 
+<div style="text-align:center">
+	<video autoplay="true" id="videoElement"></video>
+</div>
+<script>
+var video = document.querySelector("#videoElement");
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}
+</script>
+</body>
+</html>

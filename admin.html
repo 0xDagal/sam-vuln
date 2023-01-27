@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'accueil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_v2.css') }}">
+  </head>
+  <body>
+    <header>
+        <nav class="navbar">
+          <div class="logo">DLS Cyber</div>
+          <ul class="nav-links">
+            <!---->
+            <input type="checkbox" id="checkbox_toggle" />
+            <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+            <!---->
+            <div class="menu">
+              {% if user is not defined %}
+              <a href="login.html">Login</a> |
+              <a href="register.html">Signin</a> |
+              {% else %}
+              <a href="mon_compte">Account</a> |
+              <a href="/" onclick="document.cookie='session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'">Logout</a> |
+              {% endif %}
+              {% if user == 'admin' %}
+              <!-- <a href="admin?cmd=photo">Admin Panel</a> | -->
+              <li class="services">
+                <a href="admin">Admin Panel  </a> |
+                <ul class="dropdown">
+                  <li><a href="admin?cmd=photo">photo</a></li>
+                  <li><a href="admin?cmd=print">print</a></li>
+                  <li><a href="admin?cmd=date">date</a></li>
+                </ul>
+              </li>
+              <a href="contact">Contact</a>
+              {% else %}
+              <a href="contact">Contact</a>
+              {% endif %}
+            </div>
+          </ul>
+        </nav>
+        <!-- OLD NAVBAR
+        <nav style="text-align:center">
+            {% if user is not defined %}
+            <a href="login.html">Login</a> |
+            <a href="register.html">Signin</a> |
+            {% else %}
+            <a href="mon_compte">Account</a> |
+            <a href="/" onclick="document.cookie='session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'">Logout</a> |
+            {% endif %}
+            {% if user == 'admin' %}
+            <a href="contact">Contact</a> |
+            <a href="admin?arg=photo">Admin Panel</a>
+            {% else %}
+            <a href="contact">Contact</a>
+            {% endif %}
+          </nav>
+        -->
+    </header>
+    <div style="text-align:center">
+      <p>You don't seem so stupid after all. You want a little flag, right?</p>
+      <p>You are on the right track... It seems.</p>
+      <br>
+      <img src="/static/images/hungry-eating.gif" width="500" height="600">
+    </div>
+    <br>
+    <div style="text-align:center">
+The site being still under construction, the features of the admin panel are still under development.
+    </div>
+    <br>
+    <footer style="text-align:center">
+        <b><a href="/" >Back to home page</a></b>
+        <br>
+        {{ content }}
+        <br>
+        <!--
+        <nav>
+          <a href="admin?cmd=photo">photo</a>
+          <a href="admin?cmd=print">print</a>
+          <a href="admin?cmd=date">date</a>
+          <a href="admin?cmd=.">.</a>
+          <br>
+        </nav>
+        -->
+    </footer>
+  </body>
+</html>

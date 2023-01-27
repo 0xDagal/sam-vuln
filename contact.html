@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'accueil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_v2.css') }}">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">DLS Cyber</div>
+        <ul class="nav-links">
+          <!---->
+          <input type="checkbox" id="checkbox_toggle" />
+          <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+          <!---->
+          <div class="menu">
+            {% if user is not defined %}
+            <a href="login.html">Login</a> |
+            <a href="register.html">Signin</a> |
+            {% else %}
+            <a href="mon_compte">Account</a> |
+            <a href="/" onclick="document.cookie='session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'">Logout</a> |
+            {% endif %}
+            {% if user == 'admin' %}
+            <!-- <a href="admin?cmd=photo">Admin Panel</a> | -->
+            <li class="services">
+              <a href="admin">Admin Panel  </a> |
+              <ul class="dropdown">
+                <li><a href="admin?cmd=photo">photo</a></li>
+                <li><a href="admin?cmd=print">print</a></li>
+                <li><a href="admin?cmd=date">date</a></li>
+              </ul>
+            </li>
+            <a href="contact">Contact</a>
+            {% else %}
+            <a href="contact">Contact</a>
+            {% endif %}
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <div style="text-align:center">
+      <p>Admin user : admin<br>Mail: jean@bondbayonne.fr --- Tel: 01 23 45 67 89</p>
+    </div>
+    <br>
+    <div style="text-align:center">
+	{% if user == 'admin' %}
+    You can contact the system administrator if the features of admin panel doesn't work.
+	{% else %}
+	{% endif %}
+    </div>
+    <br>
+    <footer style="text-align:center">
+      <b><a href="/" >Back to home page</a></b>
+    </footer>
+  </body>
+</html>
+

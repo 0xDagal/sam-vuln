@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'inscription</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_v2.css') }}">
+    <script>
+        function validateForm() {
+            var x = document.forms["myForm"]["username"].value;
+            var y = document.getElementById("password");//document.forms["myForm"]["password"].value;
+            var z = document.getElementById("confirm");//document.forms["myForm"]["confirm"].value;
+            if (x.length < 4 || x.length > 80) {
+                alert("The username must be between 4 and 80 characters long.");
+                return false;
+            }
+            if (y.length < 8 || y.length > 40) {
+                alert("The password must be between 8 and 40 characters long.");
+                return false;
+            }
+            if (y.value != z.value) {
+                alert("The passwords do not match.");
+                return false;
+            }
+            alert('Welcome to hell young padawan ' + document.getElementById('username').value + ' !')
+        }
+    </script>
+    <nav class="navbar">
+      <div class="logo">DLS Cyber</div>
+      <ul class="nav-links">
+        <!---->
+        <input type="checkbox" id="checkbox_toggle" />
+        <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+        <!---->
+        <div class="menu">
+          {% if user is not defined %}
+          <a href="login.html">Login</a> |
+          <a href="register.html">Signin</a> |
+          {% else %}
+          <a href="mon_compte">Account</a> |
+          <a href="/" onclick="document.cookie='session_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'">Logout</a> |
+          {% endif %}
+          {% if user == 'admin' %}
+          <!-- <a href="admin?cmd=photo">Admin Panel</a> | -->
+          <li class="services">
+            <a href="admin">Admin Panel  </a> |
+            <ul class="dropdown">
+              <li><a href="admin?cmd=photo">photo</a></li>
+              <li><a href="admin?cmd=print">print</a></li>
+              <li><a href="admin?cmd=date">date</a></li>
+            </ul>
+          </li>
+          <a href="contact">Contact</a>
+          {% else %}
+          <a href="contact">Contact</a>
+          {% endif %}
+        </div>
+      </ul>
+    </nav>
+  </head>
+  <body>
+    <h1 style="text-align:center">Inscription</h1>
+    <br>
+    <form name="myForm" method="post" action="register" onsubmit="return validateForm()" style="text-align:center">
+      <label for="username">Nom d'utilisateur :</label>
+      <input type="text" id="username" name="username">
+      <br>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" name="password">
+      <br>
+      <label for="confirm">Confirmation de Mot de passe:</label>
+      <input type="password" id="confirm" name="confirm">
+      <br>
+      <input type="submit" value="S'inscrire" > <!-- onclick="alert('Welcome to hell young padawan ' + document.getElementById('username').value) + ' !'"> -->
+      <footer style="text-align:center">
+        <br>
+        <b><a href="/" >Back to home page</a></b>
+      </footer>
+    </form>
+  </body>
+</html>
